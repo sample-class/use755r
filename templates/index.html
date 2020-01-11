@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <div class="jumbotron text-center mt-4">
+      <h1 class="display-4">Всякие туры</h1>
+      <p class="lead">Для тех, кого отвлекают дома</p>
+      <p class="mt-5 w-50 mx-auto">Лучшие направления,где никто не будет вам мешать сидеть на берегу и изучать программирование, дизайн, разработку игр и управление продуктами</p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="row mt-5">
+        {% for id_tour, info_tour in tours.items() %}
+        <div class="col-4">
+            <div class="card mb-3" >
+            <img  src="{{info_tour.picture}}" width="300" height="200" class="card-img-top img-fluid">
+            <div class="card-body">
+              <h5 class="card-title">{{info_tour.title}}</h5>
+              <p class="card-text">{{info_tour.description|truncate(100)}}</p>
+              <a href="/tour/{{id_tour}}" class="btn btn-sm btn-primary">Подробнее</a>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
