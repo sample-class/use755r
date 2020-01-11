@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1 class="display-5 mt-4">Летим {{departures.get(direction)}}</h1>
+    {% set min_price = departure.values()|min(attribute='price') %}
+    {% set max_price = departure.values()|max(attribute='price') %}
+    {% set min_night = departure.values()|min(attribute='nights') %}
+    {% set max_night = departure.values()|max(attribute='nights') %}
+
+    <p class="mb-4">Найдено {{departure|length}} туров, от {{min_price.price}} до  {{max_price.price}} и от {{min_night.nights}} ночей до {{max_night.nights}} ночей</p>
+    <div class="row mt-5">
+        {% for id_tour, info_tour in departure.items() %}
+        <div class="col-4">
+            <div class="card mb-3" >
+                <img src="{{info_tour.picture}}" class="card-img-top img-fluid">
+                <div class="card-body">
+                 <h5 class="card-title">{{info_tour.title}}</h5>
+                 <p class="card-text">{{info_tour.description|truncate(100)}}</p>
+                 <a href="/tour/{{id_tour}}" class="btn btn-sm btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
